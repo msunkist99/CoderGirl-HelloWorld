@@ -13,8 +13,15 @@ namespace Test
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                Program.Main();
-                Assert.Equal($"Hello World!{Environment.NewLine}", sw.ToString());
+
+                using (StringReader sr = new StringReader(Environment.NewLine))
+                {
+                    Console.SetIn(sr);
+
+                    Program.Main();
+                }
+                    
+                Assert.Equal($"Hello CoderGirl!{Environment.NewLine}", sw.ToString());
             }
         }
     }
